@@ -1,0 +1,156 @@
+@font-face{font-family:'Avenir Next';font-style:normal;font-weight:400;src:local('Avenir Next'),local("AvenirNext-Regular"),local("AvenirNextLTPro-Regular"),url(/common/fonts/AvenirNextLTPro-Regular.otf);}
+@font-face{font-family:'HYQiHei';font-style:normal;font-weight:400;src:local('HYQiHei'),url(/common/fonts/HYQiHei-35S.ttf)}
+@font-face{font-family:'Lora';font-weight:400;src:local('Lora Italic'),url(/common/fonts/Lora-Italic.ttf)}
+@font-face{font-family:'HYKaiTiS';font-weight:400;src:local('HYKaiTiS'),url(/common/fonts/HYKaiTiS.ttf)}
+@font-face{font-family:'Baskerville';font-weight:400;src:local('Baskerville Italic'),url(/common/fonts/Baskerville-Italic.ttf)}
+@font-face{font-family:'HYFangSongS';font-weight:400;src:local('HYFangSongS'),url(/common/fonts/HYFangSongS.ttf)}
+
+
+html {
+    box-sizing: border-box;
+    overflow-y: scroll;
+    font-family: 'Avenir Next', "HYQiHei", "PingFang SC", "Microsoft YaHei", "Noto Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    word-wrap: break-word;
+    font-kerning: normal;
+    font-feature-settings: "kern", "liga", "clig", "calt";
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    margin: 0;
+}
+
+body>main {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 1.5rem;
+}
+
+body.light {
+    --bg: #fefefe;
+    --header: #000;
+    --text: #222;
+    --title: #222;
+    --link: #3c3c3c;
+    --hr: #ddd;
+    --inlineCode-bg: #f5f5f5;
+    --inlineCode-text: #1a1a1a;
+    --grayColor: #888;
+    --grayLightColor: #aaa;
+}
+
+body.dark {
+    --bg: #282c35;
+    --header: #fff;
+    --text: hsla(0,0%,100%,0.88);
+    --title: #fff;
+    --link: #fff;
+    --hr: #555;
+    --inlineCode-bg: #373c49;
+    --inlineCode-text: #e6e6e6;
+    --grayColor: #999;
+    --grayLightColor: #777;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    margin: 3.5rem 0 1.75rem;
+    padding: 0;
+    line-height: 1.1;
+    font-family: 'Lora', "HYKaiTiS", KaiTi, serif;
+}
+
+h1 { color: var(--title); font-size: 2.5rem; }
+h2 { font-size: 1.73286rem; }
+h3 { font-size: 1.4427rem; }
+h4 { font-size:1rem;letter-spacing:0.140625em;text-transform:uppercase; }
+h5 { font-size:0.83255rem; }
+h6 { font-size:0.75966rem;font-style:italic; }
+
+p { margin: 0 0 1.75rem; padding: 0; color: var(--text); }
+p *:last-child{margin-bottom:0;}
+
+i, em { font-family: 'Lora', "HYKaiTiS", KaiTi, serif; font-style: italic;}
+strong{ font-weight: 500;}
+a { color: var(--link); text-decoration: underline; transition: all .5s; opacity: .8}
+a:hover { opacity: 1; }
+
+blockquote{
+    margin:0 1.75rem 1.75rem 0;
+    padding:0 0 0 1.42188rem;;
+    font-size: 1.20112rem;
+    line-height:1.75rem;
+    color: inherit;
+    font-style:italic;
+    border-left:0.32813rem solid hsla(0,0%,0%,0.9);
+    border-left-color:inherit;
+    opacity:0.8;
+    font-family: 'Lora', "HYKaiTiS", KaiTi, serif;
+}
+blockquote *:last-child{margin-bottom:0;}
+blockquote cite{font-size:1rem;line-height:1.75rem;color:hsla(0,0%,0%,0.9);font-weight:400;}blockquote cite:before{content:"— ";}
+
+ol, ul {
+    margin: 0 1.75rem 1.75rem 0;
+    padding:0;
+    list-style-position:outside;
+    list-style-image:none;
+}
+ul{list-style:disc;}
+ol li{padding-left:0;}
+ul li{padding-left:0;}
+li{margin-bottom:calc(1.75rem / 2);}
+li *:last-child{margin-bottom:0;}
+li > p{margin-bottom:calc(1.75rem / 2);}
+li > ol{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}li > ul{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}
+
+code {
+    font-family: monospace, "HYQiHei";
+    font-size:0.75rem;
+    line-height:1.5rem;
+}
+p code, li code{font-size:0.85rem;color: var(--inlineCode-text);}
+
+img{
+    border-style:none;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding:0;
+    display: block;
+}
+figure {
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    width: fit-content;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+figcaption {
+    font-style: italic;
+    font-size: .8rem;
+    line-height: 2;
+    font-family: 'Baskerville', "HYFangSongS", "Songti SC", serif;
+}
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #333;
+    background: #f8f8f8;
+}
+
+#article-header .extra-data {
+    font-size: 0.83255rem;
+    line-height: 1.75rem;
+    display: block;
+    margin-bottom: 1.75rem;
+    margin-top: -1.4rem;
+    color: var(--grayColor);
+}
+
+#article-content a { font-family: 'Lora', "HYKaiTiS", KaiTi, serif;}
