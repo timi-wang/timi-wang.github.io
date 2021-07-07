@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/favicon.ico" rel="shortcut icon">
+    <style>
+        @font-face{font-family:'Avenir Next';font-style:normal;font-weight:400;src:local('Avenir Next'),local("AvenirNext-Regular"),local("AvenirNextLTPro-Regular"),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/AvenirNextLTPro-Regular.otf);}
+        @font-face{font-family:'Lora';font-weight:400;src:local('Lora Italic'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/Lora-Italic.ttf)}
+        @font-face{font-family:'Baskerville';font-weight:400;src:local('Baskerville Italic'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/Baskerville-Italic.ttf)}
+        @font-face{font-family:'HYQiHei';font-style:normal;font-weight:400;src:local('HYQiHei'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYQiHei-35S.ttf)}
+        @font-face{font-family:'HYKaiTiS';font-weight:400;src:local('HYKaiTiS'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYKaiTiS.ttf)}
+        @font-face{font-family:'HYFangSongS';font-weight:400;src:local('HYFangSongS'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYFangSongS.ttf)}
+    </style>
+    
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/github.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+    
+
+    
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/common/base.css"/>
+</head>
+<body class="light">
+<main>
+    <header id="common-header">
+        
+<style>
+    #common-header {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #common-header>.menu {
+        display: flex;
+        flex-flow: row nowrap;
+        list-style: none;
+    }
+    #common-header>.menu>a {
+        opacity: .5;
+        font-size: 14px;
+        transition: all .5s;
+        text-decoration: none;
+    }
+    #common-header>.menu>a:hover {
+        opacity: 1;
+    }
+    #common-header>.menu>a:before {
+        content: '·';
+        padding: 0 8px;
+        color: var(--text);
+    }
+    #common-header>.menu>a:first-child:before {
+        display: none;
+    }
+</style>
+<a href="/" title="Home">
+    <img src="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/common/logo.png" style="width: 48px">
+</a>
+<span class="menu">
+    <a href="/articles" title="articles">Articles</a>
+    <a href="/blog" title="blog">Blog</a>
+    <a href="/about" title="about">About</a>
+</span>
+
+
+    </header>
+    <article id="article">
+        <header id="article-header">
+            <h1>测试</h1>
+            <p class="extra-data">2021.7.8</p>
+        </header>
+        <div id="article-content">
+            
+      <h2>
+        <a class="anchor" href="#kubernetes-"></a>
+        kubernetes入门级别的新手引导。
+      </h2>
+    <p><img src="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/klee.jpeg" alt=""/></p>
+<p>
+          <figure>
+              <img src="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/klee.jpeg" alt="Paul Klee - Color Chart (1931) 入门级别的新手引导">
+              <figcaption>Paul Klee - Color Chart (1931) 入门级别的新手引导</figcaption>
+          </figure>
+        </p>
+
+      <h2>
+        <a class="anchor" href="#-"></a>
+        基础概念
+      </h2>
+    <blockquote>
+<p>Dorothy followed her through many of the beautiful rooms in her castle.</p>
+</blockquote>
+<blockquote>
+<p>简而言之是一个容器管理系统，开源，谷歌背书</p>
+</blockquote>
+<ul>
+<li><strong>Kubernetes Master</strong>是三个跑在同一节点的核心进程的总称：<ul>
+<li><a href="https://kubernetes.io/docs/admin/kube-apiserver/">kube-apiserver</a>：提供对外kubernetes api接口</li>
+<li><a href="https://kubernetes.io/docs/admin/kube-controller-manager/">kube-controller-manager</a>：是一群控制器的总称：<ul>
+<li><code>node controller</code>: 发现新节点及监控挂掉的节点</li>
+<li><em>replication controller</em>: 维护确保pods数量正确</li>
+<li><strong>endpoints controller</strong>: 绑定services和pods</li>
+<li>service account &amp; token controller: 为新的namespace创建默认账号及api访问token</li>
+</ul>
+</li>
+<li><a href="https://kubernetes.io/docs/admin/kube-scheduler/">kube-scheduler</a>：负责pods与nodes的合理调度分配</li>
+</ul>
+</li>
+<li>其他非master节点上会跑两个进程：<ul>
+<li><a href="https://kubernetes.io/docs/admin/kubelet/">kubelet</a>：负责与master通信</li>
+<li><a href="https://kubernetes.io/docs/admin/kube-proxy/">kube-proxy</a>：负责节点间的网络代理</li>
+</ul>
+</li>
+</ul>
+<p>基本kubernetes对象：pod, service, volume, namespace<br>高级kubernetes对象：replicaSet, deployment, statefulSet, daemonSet, job</p>
+<p>一些附加组件：</p>
+<ul>
+<li>DNS: cluster内部的dns解析系统</li>
+<li>web ui: web的控制界面</li>
+<li>container resource monitoring: 资源监控</li>
+<li>cluster-level logging: 负责将container的log保存到特定的log store</li>
+</ul>
+
+      <h2>
+        <a class="anchor" href="#-cluster"></a>
+        创建一个cluster
+      </h2>
+    <p>kubernetes简而言之是一个容器管理系统，开源，谷歌背书。</p>
+<p>架构上包含master和node，每个node可以视为一台服务器或ECS，node上可以跑多个process，master管理node。一个线上环境kubernetes集群最少应有三个nodes。</p>
+<p><a href="https://github.com/kubernetes/minikube">Minikube</a>是kubernetes的一个具体实现，可在本地创建一个虚拟机，模拟一个简单集群。</p>
+<p>minikube有关命令：</p>
+<pre><code class="language-bash hljs">$ minikube start              // 启动集群
+$ kubectl cluster-info          // 显示集群信息，会显示master的管理界面url
+$ kubectl get nodes             // 显示所有节点信息</code></pre>
+      <h2>
+        <a class="anchor" href="#-"></a>
+        部署应用
+      </h2>
+    <p>有关命令：</p>
+<pre><code class="language-bash hljs">$ kubectl run [name] --image=[镜像地址] --port=8080     // 部署应用
+$ kubectl get deployments               // 获取所有deployments信息
+$ kubectl proxy // 开启cluster内部的网络代理，这样可以直接由外部url访问内部api</code></pre><p>用<code>$ kubectl get pods</code>可以显示pod信息，然后可以通过代理的url直接访问我们部署的应用接口。</p>
+<pre><code class="language-bash hljs">//  将pod名称记到全局变量里
+$ <span class="hljs-built_in">export</span> POD_NAME=$(kubectl get pods -o go-template --template <span class="hljs-string">&#x27;{{range .items}}{{.metadata.name}}{{&quot;\n&quot;}}{{end}}&#x27;</span>)
+$ <span class="hljs-built_in">echo</span> Name of the Pod: <span class="hljs-variable">$POD_NAME</span>
+
+// 假设kubectl proxy返回的是http://localhost:8001
+$ curl http://localhost:8001/version    // 同 kubectl version的client version
+
+// 访问应用的api
+$ curl http://localhost:8001/api/v1/proxy/namespaces/default/pods/<span class="hljs-variable">$POD_NAME</span>/</code></pre>
+      <h2>
+        <a class="anchor" href="#-"></a>
+        更多应用交互
+      </h2>
+    <p><strong>Pod</strong>是一个应用的最小逻辑单元集合，可以包括多个containerized app和多个volume，一个node上可以跑多个pod，他们共享<strong>存储(volumes)<strong>，</strong>ip</strong>，<strong>启动脚本</strong>。</p>
+<p>
+          <figure>
+              <img src="https://d33wubrfki0l68.cloudfront.net/5cb72d407cbe2755e581b6de757e0d81760d5b86/a9df9/docs/tutorials/kubernetes-basics/public/images/module_03_nodes.svg" alt="d33wubrfki0l68">
+              <figcaption>d33wubrfki0l68</figcaption>
+          </figure>
+        </p>
+<p>有关命令：</p>
+<pre><code class="language-bash hljs">$ kubectl get pods          // 获取pods信息
+$ kubectl describe pods     // 查看pods详情，describe命令也可用于node和deployments</code></pre><p>应用里输出到console（STDOUT）中的内容会被记录到log中，可以通过<code>kubectl logs $POD_NAME</code>查看。</p>
+<p>使用<code>kubectl exec</code>可在container中执行代码：</p>
+<pre><code class="language-bash hljs">$ kubectl <span class="hljs-built_in">exec</span> <span class="hljs-variable">$POD_NAME</span> env  // 输出container中的环境变量
+$ kubectl <span class="hljs-built_in">exec</span> -ti <span class="hljs-variable">$POD_NAME</span> bash // 在container中启动bash</code></pre>
+      <h2>
+        <a class="anchor" href="#-"></a>
+        启动服务暴露应用接口
+      </h2>
+    <p>service负责维护pods的生命周期，负责保活及暴露对外接口。它定义了一群逻辑相关的pods及它们的接入方式：</p>
+<ul>
+<li>ClusterIP(默认)：暴露一个仅供集群内访问的ip</li>
+<li>NodePort：暴露对外可访问的port,ip就是node本身的ip，<NodeIp>:<NodePort>，是clusterIp的父类</li>
+<li>LoadBalancer：创建一个基于当前cloud的负载均衡实例，提供一个固定的对外ip，NodePort的父类</li>
+<li>ExternalName：返回一个cname记录，直接用名称暴露对外接口</li>
+</ul>
+<p>service用标签和选择器去匹配pods：</p>
+<p><img src="https://d33wubrfki0l68.cloudfront.net/b964c59cdc1979dd4e1904c25f43745564ef6bee/f3351/docs/tutorials/kubernetes-basics/public/images/module_04_labels.svg" alt=""/></p>
+<p>有关命令：</p>
+<pre><code class="language-bash hljs">$ kubectl get services          // 查看所有服务
+$ kubectl expose deployment/kubernetes-bootcamp --<span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;NodePort&quot;</span> --port 8080 // 启动service
+$ kubectl describe services/kubernetes-bootcamp     // 查看service详情
+
+// 将nodeport存入环境变量
+$ <span class="hljs-built_in">export</span> NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template=<span class="hljs-string">&#x27;{{(index .spec.ports 0).nodePort}}&#x27;</span>)
+$ <span class="hljs-built_in">echo</span> NODE_PORT=<span class="hljs-variable">$NODE_PORT</span>
+
+// 测试接口
+$ curl $(minikube ip):<span class="hljs-variable">$NODE_PORT</span></code></pre><p>可以自定义标签筛选pods或service：</p>
+<pre><code class="language-bash hljs">$ kubectl describe deployment           // 可以看到标签名称
+$ kubectl get pods -l run=kubernetes-bootcamp   // 通过标签筛选pods
+$ kubectl get services -l run=kubernetes-bootcamp   //通过标签筛选service
+
+// 将pod名称存入环境变量
+$ <span class="hljs-built_in">export</span> POD_NAME=$(kubectl get pods -o go-template --template <span class="hljs-string">&#x27;{{range .items}}{{.metadata.name}}{{&quot;\n&quot;}}{{end}}&#x27;</span>)
+$ <span class="hljs-built_in">echo</span> Name of the Pod: <span class="hljs-variable">$POD_NAME</span>
+
+$ kubectl label pod <span class="hljs-variable">$POD_NAME</span> app=v1    // 将pod的label改为app=v1
+$ kubectl describe pods <span class="hljs-variable">$POD_NAME</span>       // 可以看到label值已变为app=v1
+
+$ kubectl delete service -l run=kubernetes-bootcamp // 删除service，但app本身还是在pods里继续跑着的
+</code></pre>
+      <h2>
+        <a class="anchor" href="#-"></a>
+        水平拓展应用
+      </h2>
+    <p>水平增加deployment的数量</p>
+<p><img src="https://d33wubrfki0l68.cloudfront.net/30f75140a581110443397192d70a4cdb37df7bfc/b5f56/docs/tutorials/kubernetes-basics/public/images/module_05_scaling2.svg" alt=""/></p>
+<p>有关命令：</p>
+<pre><code class="language-bash hljs">$ kubectl scale deployments/kubernetes-bootcamp --replicas=4    // 拓展replicas到四个
+$ kubectl get pods -o wide  // 显示pods及ip</code></pre>
+      <h2>
+        <a class="anchor" href="#-"></a>
+        更新应用
+      </h2>
+    <p>无宕机动态更新，同时保留版本信息，方便回滚。</p>
+<pre><code class="language-bash hljs">// 通知deployment使用新的image
+$ kubectl <span class="hljs-built_in">set</span> image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2    
+$ kubectl rollout status deployments/kubernetes-bootcamp    // 显示rollout状态
+$ kubectl get pods  // 可以看到image信息已更新
+$ kubectl rollout undo deployments/kubernetes-bootcamp  // 返回上一个版本</code></pre><pre><code class="language-javascript hljs"><span class="hljs-keyword">const</span> searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title function_">URLSearchParams</span>(location.<span class="hljs-property">search</span>);
+<span class="hljs-keyword">const</span> title = searchParams.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;t&#x27;</span>);
+<span class="hljs-keyword">const</span> year = searchParams.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;y&#x27;</span>);
+<span class="hljs-keyword">if</span>(!title || !year) {
+<span class="hljs-keyword">return</span> location.<span class="hljs-property">href</span> = <span class="hljs-string">&#x27;https://timi-wang.github.io&#x27;</span>;
+}
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;head title&#x27;</span>).<span class="hljs-property">innerText</span> = title.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;_&#x27;</span>).<span class="hljs-title function_">slice</span>(<span class="hljs-number">1</span>).<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27; &#x27;</span>);</code></pre>
+        </div>
+        <footer id="article-footer">
+        
+            <a href=""></a>
+        
+        
+            <a href=""></a>
+        
+        </footer>
+    </article>
+</main>
+</body>
+</html>

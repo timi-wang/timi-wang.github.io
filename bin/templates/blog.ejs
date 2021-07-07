@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="<%= cdnBase %>/favicon.ico" rel="shortcut icon">
+    <style>
+        @font-face{font-family:'Avenir Next';font-style:normal;font-weight:400;src:local('Avenir Next'),local("AvenirNext-Regular"),local("AvenirNextLTPro-Regular"),url(<%= cdnBase %>/fonts/full/AvenirNextLTPro-Regular.otf);}
+        @font-face{font-family:'Lora';font-weight:400;src:local('Lora Italic'),url(<%= cdnBase %>/fonts/full/Lora-Italic.ttf)}
+        @font-face{font-family:'Baskerville';font-weight:400;src:local('Baskerville Italic'),url(<%= cdnBase %>/fonts/full/Baskerville-Italic.ttf)}
+        @font-face{font-family:'HYQiHei';font-style:normal;font-weight:400;src:local('HYQiHei'),url(<%= cdnBase %>/fonts/subset/HYQiHei-35S.ttf)}
+        @font-face{font-family:'HYKaiTiS';font-weight:400;src:local('HYKaiTiS'),url(<%= cdnBase %>/fonts/subset/HYKaiTiS.ttf)}
+        @font-face{font-family:'HYFangSongS';font-weight:400;src:local('HYFangSongS'),url(<%= cdnBase %>/fonts/subset/HYFangSongS.ttf)}
+    </style>
+    <% if (highlight) { %>
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/github.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+    <% } %>
+
+    <%- include(headPath, {cdnBase: cdnBase}); %>
+
+    <link type="text/css" rel="stylesheet" href="<%= cdnBase %>/common/base.css"/>
+</head>
+<body class="light">
+<main>
+    <header id="common-header">
+        <%- headerHtmlStr %>
+    </header>
+    <article id="article">
+        <header id="article-header">
+            <h1><%- title %></h1>
+            <p class="extra-data"><%- date %></p>
+        </header>
+        <div id="article-content">
+            <%- content %>
+        </div>
+        <footer id="article-footer">
+        <% if (prev) { %>
+            <a href="<%= prev.href %>" class="hover-underline">
+                <label>Prev</label>
+                <p><%= prev.title %></p>
+            </a>
+        <% } else {%>
+            <a href=""></a>
+        <% } %>
+        <% if (next) { %>
+            <a href="<%= next.href %>" style="text-align: right" class="hover-underline">
+                <label>Next</label>
+                <p><%= next.title %></p>
+            </a>
+        <% } else {%>
+            <a href=""></a>
+        <% } %>
+        </footer>
+    </article>
+</main>
+</body>
+</html>

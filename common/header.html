@@ -1,0 +1,38 @@
+
+<style>
+    #common-header {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #common-header>.menu {
+        display: flex;
+        flex-flow: row nowrap;
+        list-style: none;
+    }
+    #common-header>.menu>a {
+        opacity: .5;
+        font-size: 14px;
+        transition: all .5s;
+        text-decoration: none;
+    }
+    #common-header>.menu>a:hover {
+        opacity: 1;
+    }
+    #common-header>.menu>a:before {
+        content: '·';
+        padding: 0 8px;
+        color: var(--text);
+    }
+    #common-header>.menu>a:first-child:before {
+        display: none;
+    }
+</style>
+<a href="/" title="Home"><img src="https://raw.githubusercontent.com/timi-wang/timi-wang.github.io/main/common/logo.png"></a>
+<span class="menu">
+    <a href="/articles" title="articles">Articles</a>
+    <a href="/blog" title="blog">Blog</a>
+    <a href="/about" title="about">About</a>
+</span>
+

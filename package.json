@@ -1,0 +1,26 @@
+{
+  "name": "timi-wang.github.io",
+  "version": "1.0.0",
+  "description": "new blog",
+  "main": "index.js",
+  "scripts": {
+    "update:blog": "node bin/updateBlog.js",
+    "push:hard": "git add . && git commit --amend --no-edit && git push -f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timi-wang/timi-wang.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timi-wang/timi-wang.github.io/issues"
+  },
+  "homepage": "https://github.com/timi-wang/timi-wang.github.io#readme",
+  "devDependencies": {
+    "ejs": "^3.1.6",
+    "highlight.js": "^11.1.0",
+    "marked": "^2.1.3",
+    "opentype.js": "^1.3.3"
+  }
+}
