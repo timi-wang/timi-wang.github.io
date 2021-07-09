@@ -1,15 +1,3 @@
-
-
-@font-face{font-family:'Avenir Next';font-style:normal;font-weight:400;src:local('Avenir Next'),local("AvenirNext-Regular"),local("AvenirNextLTPro-Regular"),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/AvenirNextLTPro-Regular.otf);}
-@font-face{font-family:'Lora';font-weight:400;src:local('Lora Italic'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/Lora-Italic.ttf)}
-@font-face{font-family:'Baskerville';font-weight:400;src:local('Baskerville Italic'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/Baskerville-Italic.ttf)}
-
-
-@font-face{font-family:'HYQiHei';font-style:normal;font-weight:400;src:local('HYQiHei'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYQiHei-35S.ttf)}
-@font-face{font-family:'HYKaiTiS';font-weight:400;src:local('HYKaiTiS'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYKaiTiS.ttf)}
-@font-face{font-family:'HYFangSongS';font-weight:400;src:local('HYFangSongS'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYFangSongS.ttf)}
-
-
 html {
     box-sizing: border-box;
     overflow-y: scroll;
