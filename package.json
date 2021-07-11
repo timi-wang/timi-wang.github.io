@@ -4,7 +4,8 @@
   "description": "new blog",
   "main": "index.js",
   "scripts": {
-    "update:blog": "node bin/updateBlog.js",
+    "create:blog": "node bin/createBlog.js",
+    "create:blog:prod": "NODE_ENV=production node bin/createBlog.js",
     "push:hard": "git add . && git commit --amend --no-edit && git push -f"
   },
   "repository": {

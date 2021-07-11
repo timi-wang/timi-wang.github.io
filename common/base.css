@@ -60,6 +60,8 @@ h3 { font-size: 1.4427rem; }
 h4 { font-size:1rem;letter-spacing:0.140625em;text-transform:uppercase; }
 h5 { font-size:0.83255rem; }
 h6 { font-size:0.75966rem;font-style:italic; }
+h1 .anchor svg, h2 .anchor svg, h3 .anchor svg, h4 .anchor svg, h5 .anchor svg, h6 .anchor svg {visibility: hidden;}
+h1:hover .anchor svg, h2:hover .anchor svg, h3:hover .anchor svg, h4:hover .anchor svg, h5:hover .anchor svg, h6:hover .anchor svg, h1 .anchor:focus svg, h2 .anchor:focus svg, h3 .anchor:focus svg, h4 .anchor:focus svg, h5 .anchor:focus svg, h6 .anchor:focus svg {visibility: visible;}
 
 p { margin: 0 0 1.75rem; padding: 0; color: var(--text); }
 p *:last-child{margin-bottom:0;}
@@ -83,6 +85,7 @@ a.hover-underline:before {
     transition-delay: 0s;
 }
 a.hover-underline:hover:before {transform: scaleX(1);}
+a.anchor {text-decoration: none;float: left;padding-right: 4px;margin-left: -20px;}
 
 blockquote{
     margin:0 1.75rem 1.75rem 0;
@@ -100,7 +103,7 @@ blockquote *:last-child{margin-bottom:0;}
 blockquote cite{font-size:1rem;line-height:1.75rem;color:hsla(0,0%,0%,0.9);font-weight:400;}blockquote cite:before{content:"— ";}
 
 ol, ul {
-    margin: 0 1.75rem 1.75rem 0;
+    margin: 0 1.75rem 0;
     padding:0;
     list-style-position:outside;
     list-style-image:none;
@@ -184,3 +187,22 @@ hr{
 #article-footer a { line-height: 2;}
 #article-footer a p {margin: 0;}
 
+.callout {
+    padding: .85rem;
+    padding-left: 2.5rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: relative;
+    margin: 0 0 1.75rem;
+}
+.callout.red {border-color: rgb(251, 191, 188);background-color: rgb(254, 241, 241);}
+.callout.orange {border-color: rgb(254, 212, 164);background-color: rgb(255, 245, 235);}
+.callout.yellow {border-color: rgb(255, 246, 122);background-color: rgb(254, 255, 240);}
+.callout.green {border-color: rgb(183, 237, 177);background-color: rgb(240, 251, 239);}
+.callout.blue {border-color: rgb(186, 206, 253);background-color: rgb(240, 244, 255);}
+.callout.purple {border-color: rgb(205, 178, 250);background-color: rgb(246, 241, 254);}
+.callout.gray {border-color: rgb(239, 240, 241);background-color: rgb(248, 249, 250);}
+.callout .emoji {position: absolute; left: .85rem; top: .85rem;line-height: 1.25}
+.callout *:last-child {margin-bottom: 0;}
+
+/*fsda*/

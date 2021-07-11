@@ -30,7 +30,7 @@ if(!blogInfo) {
 }
 
 const ejsData = {
-  cdnBase: CDN_BASE,
+  cdnBase: process.env.NODE_ENV === 'production' ? CDN_BASE : 'http://localhost:8080',
   highlight,
   headerHtmlStr: commonHeaderHtml,
   title: name.replace(/_/g, " "),

@@ -1,10 +1,16 @@
 ## kubernetes入门级别的新手引导。
 
-![](klee.jpeg)
+![](/blog/2021/测试/klee.jpeg)
 
-![Paul Klee - Color Chart (1931) 入门级别的新手引导](klee.jpeg)
+![Paul Klee - Color Chart (1931) 入门级别的新手引导](/blog/2021/测试/klee.jpeg)
 
 ## 基础概念
+
+```callout_😀
+this is a  test
+test2
+fdas
+```
 
 > Dorothy followed her through many of the beautiful rooms in her castle.
 
