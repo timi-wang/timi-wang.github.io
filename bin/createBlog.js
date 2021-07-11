@@ -24,7 +24,7 @@ if(!blogInfo) {
     timestamp: d.getTime(),
     date: `${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}`
   };
-  blogData[year].push(blogInfo);
+  blogData[year].unshift(blogInfo);
 } else {
   blogInfo.hash = hash;
 }

@@ -23,8 +23,25 @@ exports.getBlogInfo = (blogPath) => {
     for(let i = 0; i < l; i++) {
       if(blogData[year][i].name === name) {
         blogInfo = blogData[year][i];
-        if(i > 0) prev = blogData[year][i-1];
-        if(i < l-1) next = blogData[year][i+1];
+
+        // prev post
+        if(i > 0) {
+          prev = blogData[year][i-1];
+        } else {
+          const prevYear = String(Number(year) + 1);
+          if(Array.isArray(blogData[prevYear])) {
+            prev = blogData[prevYear][blogData[prevYear].length-1];
+          }
+        }
+        // next post
+        if(i < l-1) {
+          next = blogData[year][i+1];
+        } else {
+          const nextYear = String(Number(year) - 1);
+          if(Array.isArray(blogData[nextYear])) {
+            next = blogData[nextYear][0];
+          }
+        }
         break;
       }
     }

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/favicon.ico" rel="shortcut icon">
+    <style>
+        @font-face{font-family:'Avenir Next';font-style:normal;font-weight:400;src:local('Avenir Next'),local("AvenirNext-Regular"),local("AvenirNextLTPro-Regular"),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/AvenirNextLTPro-Regular.otf);}
+        @font-face{font-family:'Lora';font-weight:400;src:local('Lora Italic'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/Lora-Italic.ttf)}
+        @font-face{font-family:'Baskerville';font-weight:400;src:local('Baskerville Italic'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/Baskerville-Italic.ttf)}
+        @font-face{font-family:'HYQiHei';font-style:normal;font-weight:400;src:local('HYQiHei'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYQiHei-35S.ttf)}
+        @font-face{font-family:'HYKaiTiS';font-weight:400;src:local('HYKaiTiS'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYKaiTiS.ttf)}
+        @font-face{font-family:'HYFangSongS';font-weight:400;src:local('HYFangSongS'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYFangSongS.ttf)}
+    </style>
+
+<!--    common head-->
+
+<!--    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/common/base.css"/>-->
+    <link type="text/css" rel="stylesheet" href="/common/base.css"/>
+<!--    header style-->
+    <style>
+        #blog-list .list-item {
+            max-width: 600px;
+            margin: 3.5rem auto 0;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        #blog-list .list-item h2 { margin: 0;}
+        #blog-list .list-item .extra-data { margin: 0 0 .5rem;}
+        #blog-list .list-item img { opacity: 0; transition: opacity .5s; position: absolute; left: 0; top: 0;}
+        #blog-list .list-item img:hover { opacity: 1;}
+        #blog-list .list-item .description { margin: .75rem 0 0;}
+        #blog-list .list-item .more { align-self: flex-end; line-height: 1.2;}
+        #blog-list .list-item .image-wrapper { display: block; width: 100%; position: relative; overflow: hidden;}
+        #blog-list .list-item .image-wrapper:before { content: ''; padding-top: 30%; display: block;}
+    </style>
+</head>
+<body class="light">
+<main>
+    <header id="common-header"></header>
+    <script>
+      const url = location.hostname === 'localhost' ? '' : 'https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io';
+
+      fetch(`${url}/common/header.html`)
+        .then(response => response.text())
+        .then(headerHtml => {
+          document.querySelector("#common-header").innerHTML = headerHtml;
+        }).catch(e => {
+        alert(e);
+      })
+    </script>
+
+    <section id="blog-list"></section>
+
+    <template id="list-item">
+        <div class="list-item">
+            <a href="" class="hover-underline"><h2></h2></a>
+            <div class="extra-data"></div>
+            <a href="" class="image-wrapper"><img alt=""></a>
+            <p class="description"></p>
+            <a href="" class="hover-underline more">more >></a>
+        </div>
+    </template>
+
+    <script>
+      (function(){
+        const prefix = location.hostname === 'localhost' ? '/blog/' : 'https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/blog/';
+
+        fetch(`${prefix}data.json`).then(response => response.json()).then(data => {
+          const years = Object.keys(data).filter(k => k.match(/^\d{4}$/)).sort((a, b) => b-a);
+          const posts = years.reduce((t, c) => {
+            return t.concat(data[c]);
+          }, []).sort((a, b) => b.timestamp - a.timestamp);
+
+          const tpl = document.querySelector('#list-item').content;
+          const list = document.querySelector('#blog-list');
+          const links = tpl.querySelectorAll("a");
+          const imageWrapper = tpl.querySelector('.image-wrapper');
+          const title = tpl.querySelector("h2");
+          const extra = tpl.querySelector(".extra-data");
+          const description = tpl.querySelector("p");
+          const imageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                const image = entry.target;
+                image.src = image.dataset.src;
+                image.onload = () => image.style.opacity = '.75';
+                imageObserver.unobserve(image);
+              }
+            });
+          });
+
+          for(let i = 0; i < posts.length; i++) {
+            const info = posts[i];
+            const year = info.date.split('.')[0];
+
+            links.forEach(a => a.href = `${prefix}${year}/${info.name}`);
+            title.innerText = info.name.replace(/_/g, ' ');
+            extra.innerText = info.date;
+            description.innerText = info.description || '';
+            imageWrapper.style.backgroundColor = `hsl(${Math.floor(Math.random()*360)}, ${Math.floor(Math.random()*50)}%, ${50+Math.floor(Math.random()*50)}%)`;
+
+            const node = document.importNode(tpl, true);
+            const image = node.querySelector("img");
+            image.dataset.src = "https://source.unsplash.com/600x180?sig="+i;
+            imageObserver.observe(image);
+
+            list.appendChild(node);
+          }
+        }).catch(e => {
+          console.error(e);
+        })
+      })();
+    </script>
+</main>
+</body>
+</html>
