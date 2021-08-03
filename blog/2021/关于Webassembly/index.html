@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/favicon.ico" rel="shortcut icon">
+    <style>
+        @font-face{font-family:'Avenir Next';font-style:normal;font-weight:400;src:local('Avenir Next Thin'),local("AvenirNext-Thin"),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/AvenirNextThin.ttf);}
+        @font-face{font-family:'Lora';font-weight:400;src:local('Lora Italic'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/Lora-Italic.ttf)}
+        @font-face{font-family:'Baskerville';font-weight:400;src:local('Baskerville Italic'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/full/Baskerville-Italic.ttf)}
+        @font-face{font-family:'HYQiHei';font-style:normal;font-weight:400;src:local('HYQiHei'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYQiHei-35S.ttf)}
+        @font-face{font-family:'HYKaiTiS';font-weight:400;src:local('HYKaiTiS'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYKaiTiS.ttf)}
+        @font-face{font-family:'HYFangSongS';font-weight:400;src:local('HYFangSongS'),url(https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/fonts/subset/HYFangSongS.ttf)}
+    </style>
+    
+
+    
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/common/base.css"/>
+</head>
+<body class="light">
+<main>
+    <header id="common-header">
+        <style>
+    #common-header {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #common-header>.menu {
+        display: flex;
+        flex-flow: row nowrap;
+        list-style: none;
+    }
+    #common-header>.menu>a {
+        opacity: .5;
+        font-size: 14px;
+        transition: all .5s;
+        text-decoration: none;
+        display: inline;
+    }
+    #common-header>.menu>a:hover {
+        opacity: 1;
+    }
+    #common-header>.menu>a:before {
+        content: '·';
+        padding: 0 8px;
+        color: var(--text);
+    }
+    #common-header>.menu>a:first-child:before {
+        display: none;
+    }
+</style>
+<a href="/" title="Home"><img src="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io/common/logo.png" style="width:48px"></a>
+<span class="menu">
+    <a href="/articles" title="articles">Articles</a>
+    <a href="/blog" title="blog">Blog</a>
+    <a href="/about" title="about">About</a>
+</span>
+
+
+    </header>
+    <article id="article">
+        <header id="article-header">
+            <h1>关于Webassembly</h1>
+            <p class="extra-data">2021.8.2</p>
+        </header>
+        <div id="article-content">
+            <p>想开一个 <code>webassembly</code> 整活系列来记录一下我对于 <code>webassembly</code> 的学习。</p>
+
+      <h2 id="What%20is%20webassembly">
+        <a aria-hidden="true" class="anchor" href="#What%20is%20webassembly">
+            <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg>
+        </a>
+        What is webassembly
+      </h2>
+    <p>首先，什么是 <code>webassembly</code>? </p>
+<p>直接拆词来看就是 <code>web</code> + <code>assembly</code>，直译就是 <em>网络汇编</em>，这种解释是对的，但又不全对。严格来讲 <code>webassembly</code> 是字节码，不是汇编，汇编是可以进一步生成字节码或机器码的编程语言，而 <code>webassembly</code> 是特指这种生成之后的字节码文件。</p>
+<p>那 <code>webassembly</code> 的出现是为了解决什么问题？</p>
+<p>按照MDN的说法是为了解决JS的性能问题，JS是脚本语言，每个JS文件都需要被下载解析编译再执行，而 <code>webassembly</code> 是用其他语言(c++, rust)编译好的字节码，下载完之后就可以直接执行了，按官方说法就是具有媲美原生的性能。</p>
+
+      <h2 id="Webassembly%20%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F">
+        <a aria-hidden="true" class="anchor" href="#Webassembly%20%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F">
+            <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg>
+        </a>
+        Webassembly 是怎么执行的？
+      </h2>
+    <p>为了把这个讲清楚可能得从芯片说起，芯片都是通过识别一系列的0和1，即高低电平来识别不同的指令，然后输出对应的结果。为了让这些01更易读点，人们发明了汇编语言，汇编的语法集与芯片指令集是一一对应的，它可以被直接编译成对应的01机器码，这大大降低了编程难度，但随之而来的一个问题是由于汇编与芯片指令是一一对应的，不同的芯片你需要专门去学习它对应的汇编语法，这是个耗时耗力的工程。</p>
+<p>
+          <figure>
+              <img src="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io//blog/2021/关于Webassembly/1.png" alt="机器码和汇编的关系">
+              <figcaption>机器码和汇编的关系</figcaption>
+          </figure>
+        </p>
+<p>为了解决这个问题，更高级的C语言出现了，写同一份C的代码，可以直接将其编译成各个芯片对应的机器码，但这一方案也不是完美无缺的，首先每个芯片你都需要单独去编译一遍，其次为了让代码能够运行在尽可能多的芯片上，即保持更高的兼容性，一些芯片的高级指令可能会被舍弃，无法物尽其用。于是前辈们用上了万能公式又创造了一个抽象层，即一个虚拟的微处理器，它有自己的字节码和对应的汇编语言，我们可以先编译成它的字节码，然后它再将其解析为真实的微处理器可以识别的机器码，这其实就是JAVA虚拟机及其跨平台原理。</p>
+<p>
+          <figure>
+              <img src="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io//blog/2021/关于Webassembly/2.png" alt="虚拟机原理">
+              <figcaption>虚拟机原理</figcaption>
+          </figure>
+        </p>
+<p>代码跑在虚拟机上，虚拟机再将它变成特定平台的机器码，虚拟机到真实芯片的编译可以不断优化以充分挖掘芯片性能。<code>Webassembly</code> 用的正是同样的思想，区别是真实的芯片变成了各种现代浏览器，虚拟机变成了浏览器的虚拟机。</p>
+<p>
+          <figure>
+              <img src="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io//blog/2021/关于Webassembly/3.png" alt="webassembly原理">
+              <figcaption>webassembly原理</figcaption>
+          </figure>
+        </p>
+<p>在浏览器里有一套通用的<a href="https://webassembly.org/getting-started/js-api/">JS API</a>，通过这些API即可执行 <code>.wasm</code> 的文件，目前 <code>webassembly</code> 还无法直接和DOM通信，所以需要一些JS的胶水代码来实现和DOM交互的功能。初始化完的 <code>webassembly</code> 实例即可被当作一个JS模块对象来调用其对外暴露的方法。其实不仅仅是浏览器， <code>webassembly</code> 还可以跑在 <code>命令行</code> 和 <code>NodeJS</code> 中。</p>
+<p>
+          <figure>
+              <img src="https://cdn.jsdelivr.net/gh/timi-wang/timi-wang.github.io//blog/2021/关于Webassembly/4.png" alt="浏览器和webassembly">
+              <figcaption>浏览器和webassembly</figcaption>
+          </figure>
+        </p>
+
+      <h2 id="%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%20Webassembly%20%E6%96%87%E4%BB%B6">
+        <a aria-hidden="true" class="anchor" href="#%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%20Webassembly%20%E6%96%87%E4%BB%B6">
+            <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg>
+        </a>
+        如何生成 Webassembly 文件
+      </h2>
+    <p>根据民间说法<a href="https://github.com/appcypher/awesome-wasm-langs">这个列表</a>里的语言应该都支持编译成 <code>webassembly</code>，但根据<a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts">官方文档</a>目前有以下几种比较主流稳定的生成方式：</p>
+<ol>
+<li><p>直接用 <code>webassembly</code> 对应的汇编语言(webassembly text format)编译，有一整套对应的<a href="https://github.com/WebAssembly/wabt">工具集</a></p>
+</li>
+<li><p>用 <a href="https://github.com/WebAssembly/binaryen">Binaryen</a> 将 <code>AssemblyScript</code> (一种TS的变种)编译成  <code>webassembly</code> </p>
+</li>
+<li><p>用 <a href="https://emscripten.org/">Emscripten</a> 将 <code>C/C++</code> 编译成 <code>webassembly</code></p>
+</li>
+<li><p>用 <a href="https://github.com/rustwasm/wasm-pack">wasm-pack</a> 将 <code>Rust</code> 编译成 <code>webassembly</code></p>
+</li>
+</ol>
+
+        </div>
+        <footer id="article-footer">
+        
+            <a href=""></a>
+        
+        
+            <a href="/blog/2021/测试" style="text-align: right" class="hover-underline">
+                <label>Next</label>
+                <p>测试</p>
+            </a>
+        
+        </footer>
+    </article>
+    <script src="https://utteranc.es/client.js"
+            repo="timi-wang/timi-wang.github.io"
+            issue-term="pathname"
+            label="comment"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+</main>
+</body>
+</html>

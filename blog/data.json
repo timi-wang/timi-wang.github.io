@@ -1,6 +1,12 @@
 {
   "2021": [
     {
+      "hash": "303cffecdad8372b13b2c925df5a6db4",
+      "name": "关于Webassembly",
+      "timestamp": 1627917727618,
+      "date": "2021.8.2"
+    },
+    {
       "hash": "385aeb0702df42c94929d29017efca81",
       "name": "测试",
       "timestamp": 1625991220664,
